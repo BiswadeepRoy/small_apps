@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import './App.css';
+import Fab from '@mui/material/Fab';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import Tooltip from '@mui/material/Tooltip';
 
 export default function App() {
   const [sec, setSec] = useState(0);
@@ -36,19 +39,31 @@ export default function App() {
   };
 
   return (
-    <div className="App">
-      <h3>
-        {min < 10 ? `0${min}` : `${min}`}:{sec < 10 ? `0${sec}` : `${sec}`}
-      </h3>
-      <button disabled={isIntervalStarted} onClick={startClockInterval}>
-        Start
-      </button>
-      <button disabled={!isIntervalStarted} onClick={stopClockInterval}>
-        Stop
-      </button>
-      <button disabled={!isIntervalStarted} onClick={resetClock}>
-        Reset
-      </button>
+    <div className="App timerbody">
+      <Tooltip title="Press the respective buttons to start stop and reset the timer" placement="bottom">
+        <h1 className="clock">
+          {min < 10 ? `0${min}` : `${min}`}:{sec < 10 ? `0${sec}` : `${sec}`}
+        </h1>
+      </Tooltip>
+      <div className="clockbuttons">
+        <Fab variant="extended" color="primary" aria-label="add"
+          disabled={isIntervalStarted} onClick={startClockInterval}>
+          <AccessTimeIcon sx={{ mr: 1 }} />
+          Start
+        </Fab>
+        <Fab variant="extended" color="primary" aria-label="add"
+          disabled={!isIntervalStarted} onClick={stopClockInterval}>
+          <AccessTimeIcon sx={{ mr: 1 }} />
+          Stop
+        </Fab>
+        <Fab variant="extended" color="primary" aria-label="add"
+          disabled={!isIntervalStarted} onClick={resetClock}>
+          <AccessTimeIcon sx={{ mr: 1 }} />
+          Reset
+        </Fab>
+      </div>
+      <div></div>
+      <div></div>
     </div>
   );
 }
